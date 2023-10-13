@@ -1,6 +1,6 @@
 package com.slack.exercise
 
-import com.slack.exercise.dagger.DaggerAppComponent
+import com.slack.exercise.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import timber.log.Timber
