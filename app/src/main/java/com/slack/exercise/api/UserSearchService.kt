@@ -10,5 +10,5 @@ interface UserSearchService {
    * Search query. Returns an API response wrapped in a [Response].
    */
   @GET("search")
-  suspend fun searchUsers(@Query("query") query: String): Response<UserSearchResponse>
+  suspend fun searchUsers(@Query("query") searchTerm: String): Response<UserSearchResponse>
 }

@@ -1,8 +1,6 @@
 package com.slack.exercise.dataprovider
 
-import com.slack.exercise.api.SlackApi
 import com.slack.exercise.model.usersearch.User
-import com.slack.exercise.model.usersearch.UserSearchResponse
 import com.slack.exercise.util.extensions.toNetworkResult
 import com.slack.exercise.util.state.NetworkResult
 import com.slack.exercise.util.state.transform

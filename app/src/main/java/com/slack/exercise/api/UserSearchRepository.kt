@@ -9,10 +9,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * Implementation of [SlackApi] using [UserSearchService] to perform the API requests.
+ * Implementation of [UserSearchRepository] using [UserSearchService] to perform the API requests.
  */
 @Singleton
-class SlackApiImpl @Inject constructor(retrofit: Retrofit) : SlackApi {
+class UserSearchRepository @Inject constructor(retrofit: Retrofit) : UserSearchService {
     private val service = retrofit.create(UserSearchService::class.java)
     override suspend fun searchUsers(searchTerm: String): Response<UserSearchResponse> {
         return withContext(Dispatchers.IO) {

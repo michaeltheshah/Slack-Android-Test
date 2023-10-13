@@ -9,6 +9,7 @@ import com.slack.exercise.dataprovider.UserSearchResultDataProvider
 import com.slack.exercise.model.usersearch.User
 import com.slack.exercise.util.state.State
 import com.slack.exercise.util.state.toState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ import javax.inject.Inject
 /**
  * ViewModel responsible for reacting to user inputs and initiating search queries.
  */
+@HiltViewModel
 class UserSearchViewModel @Inject constructor(
     private val userNameResultDataProvider: UserSearchResultDataProvider
 ) : ViewModel() {
