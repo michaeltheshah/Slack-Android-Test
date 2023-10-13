@@ -11,6 +11,17 @@ sealed interface NetworkResult<out R> {
                      val errorResponse: ErrorResponse? = null): NetworkResult<Nothing>
 }
 
+fun <T, R> NetworkResult<T>.transform(block: (T) -> R): NetworkResult<R> {
+    return when (this) {
+        is NetworkResult.Ok -> {
+            NetworkResult.Ok(block(value), response)
+        }
+        is NetworkResult.Error -> {
+            this
+        }
+    }
+}
+
 fun <T> NetworkResult<T>.toState(): State<T> {
     return when (this) {
         is NetworkResult.Ok -> {

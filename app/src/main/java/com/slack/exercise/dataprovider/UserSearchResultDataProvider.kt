@@ -1,5 +1,6 @@
 package com.slack.exercise.dataprovider
 
+import com.slack.exercise.model.usersearch.User
 import com.slack.exercise.model.usersearch.UserSearchResponse
 import com.slack.exercise.model.usersearch.UserSearchResult
 import com.slack.exercise.util.state.NetworkResult
@@ -11,7 +12,7 @@ import com.slack.exercise.util.state.NetworkResult
 interface UserSearchResultDataProvider {
 
   /**
-   * Returns a [UserSearchResponse] wrapped in a [NetworkResult].
+   * Returns a list of [User] wrapped in a [NetworkResult].
    */
-  suspend fun fetchUsers(searchTerm: String): NetworkResult<UserSearchResponse>
+  suspend fun fetchUsers(searchTerm: String): NetworkResult<List<User>>
 }

@@ -1,15 +1,18 @@
 package com.slack.exercise.ui.usersearch
 
 import android.os.Bundle
-import com.slack.exercise.R
-import dagger.android.support.DaggerAppCompatActivity
+import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
+import com.slack.exercise.ui.usersearch.screens.UserSearchScreen
 
 /**
  * Launcher activity. Kept light and simple to delegate view logic to fragment(s) it attaches.
  */
-class UserSearchActivity : DaggerAppCompatActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_user_search)
-  }
+class UserSearchActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            UserSearchScreen()
+        }
+    }
 }

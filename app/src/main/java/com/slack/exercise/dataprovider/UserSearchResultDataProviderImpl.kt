@@ -5,6 +5,7 @@ import com.slack.exercise.model.usersearch.User
 import com.slack.exercise.model.usersearch.UserSearchResponse
 import com.slack.exercise.util.extensions.toNetworkResult
 import com.slack.exercise.util.state.NetworkResult
+import com.slack.exercise.util.state.transform
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,9 +18,13 @@ class UserSearchResultDataProviderImpl @Inject constructor(
 ) : UserSearchResultDataProvider {
 
     /**
-     * Returns a [UserSearchResponse] wrapped in a [NetworkResult].
+     * Returns a list of [User] wrapped in a [NetworkResult].
      */
-    override suspend fun fetchUsers(searchTerm: String): NetworkResult<UserSearchResponse> {
-        return slackApi.searchUsers(searchTerm).toNetworkResult()
+    override suspend fun fetchUsers(searchTerm: String): NetworkResult<List<User>> {
+        return slackApi.searchUsers(searchTerm)
+            .toNetworkResult()
+            .transform {
+                it.users
+            }
     }
 }

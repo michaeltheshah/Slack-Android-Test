@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.slack.exercise.R
 import com.slack.exercise.databinding.FragmentUserSearchBinding
 import com.slack.exercise.model.usersearch.UserSearchResult
+import com.slack.exercise.ui.usersearch.viewmodel.UserSearchViewModel
 import dagger.android.support.DaggerFragment
 import timber.log.Timber
 import javax.inject.Inject
@@ -22,7 +23,7 @@ import javax.inject.Inject
 class UserSearchFragment : DaggerFragment(), UserSearchContract.View {
 
   @Inject
-  internal lateinit var presenter: UserSearchPresenter
+  internal lateinit var presenter: UserSearchViewModel
 
   private lateinit var userSearchBinding: FragmentUserSearchBinding
 
