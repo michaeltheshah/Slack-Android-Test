@@ -1,6 +1,6 @@
 package com.slack.exercise.ui.usersearch
 
-import com.slack.exercise.model.UserSearchResult
+import com.slack.exercise.model.usersearch.UserSearchResult
 
 /**
  * MVP contract for User Search.

@@ -1,7 +1,8 @@
 package com.slack.exercise.dataprovider
 
-import com.slack.exercise.model.UserSearchResult
-import io.reactivex.rxjava3.core.Single
+import com.slack.exercise.model.usersearch.UserSearchResponse
+import com.slack.exercise.model.usersearch.UserSearchResult
+import com.slack.exercise.util.state.NetworkResult
 
 /**
  * Provider of [UserSearchResult].
@@ -10,7 +11,7 @@ import io.reactivex.rxjava3.core.Single
 interface UserSearchResultDataProvider {
 
   /**
-   * Returns a [Single] emitting a set of [UserSearchResult].
+   * Returns a [UserSearchResponse] wrapped in a [NetworkResult].
    */
-  fun fetchUsers(searchTerm: String): Single<Set<UserSearchResult>>
+  suspend fun fetchUsers(searchTerm: String): NetworkResult<UserSearchResponse>
 }

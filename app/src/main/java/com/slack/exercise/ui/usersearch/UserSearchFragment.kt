@@ -10,7 +10,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.slack.exercise.R
 import com.slack.exercise.databinding.FragmentUserSearchBinding
-import com.slack.exercise.model.UserSearchResult
+import com.slack.exercise.model.usersearch.UserSearchResult
 import dagger.android.support.DaggerFragment
 import timber.log.Timber
 import javax.inject.Inject

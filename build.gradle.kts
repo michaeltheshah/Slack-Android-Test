@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.android.application) version libs.versions.agp apply false
     alias(libs.plugins.ksp) version libs.versions.ksp apply false
     alias(libs.plugins.kotlin.serialization) version libs.versions.kotlin apply false
+    alias(libs.plugins.kotlin.parcelize) version libs.versions.kotlin apply false
 }
 
 tasks.register<Delete>("clean").configure {

@@ -14,34 +14,34 @@ class UserSearchPresenter @Inject constructor(
     private val userNameResultDataProvider: UserSearchResultDataProvider
 ) : UserSearchContract.Presenter {
 
-  private var view: UserSearchContract.View? = null
-  private val searchQuerySubject = PublishSubject.create<String>()
-  private var searchQueryDisposable = Disposable.disposed()
+    private var view: UserSearchContract.View? = null
+    private val searchQuerySubject = PublishSubject.create<String>()
+    private var searchQueryDisposable = Disposable.disposed()
 
-  override fun attach(view: UserSearchContract.View) {
-    this.view = view
+    override fun attach(view: UserSearchContract.View) {
+        this.view = view
 
-    searchQueryDisposable = searchQuerySubject
-        .flatMapSingle { searchTerm ->
-          if (searchTerm.isEmpty()) {
-            Single.just(emptySet())
-          } else {
-            userNameResultDataProvider.fetchUsers(searchTerm)
-          }
-        }
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(
-            { results -> this@UserSearchPresenter.view?.onUserSearchResults(results) },
-            { error -> this@UserSearchPresenter.view?.onUserSearchError(error) }
-        )
-  }
+        searchQueryDisposable = searchQuerySubject
+            .flatMapSingle { searchTerm ->
+                if (searchTerm.isEmpty()) {
+                    Single.just(emptySet())
+                } else {
+                    userNameResultDataProvider.fetchUsers(searchTerm)
+                }
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { results -> this@UserSearchPresenter.view?.onUserSearchResults(results) },
+                { error -> this@UserSearchPresenter.view?.onUserSearchError(error) }
+            )
+    }
 
-  override fun detach() {
-    view = null
-    searchQueryDisposable.dispose()
-  }
+    override fun detach() {
+        view = null
+        searchQueryDisposable.dispose()
+    }
 
-  override fun onQueryTextChange(searchTerm: String) {
-    searchQuerySubject.onNext(searchTerm)
-  }
+    override fun onQueryTextChange(searchTerm: String) {
+        searchQuerySubject.onNext(searchTerm)
+    }
 }

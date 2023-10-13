@@ -1,18 +1,14 @@
 package com.slack.exercise.api
 
-import io.reactivex.rxjava3.core.Single
+import com.slack.exercise.model.usersearch.UserSearchResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface UserSearchService {
   /**
-   * Search query. Returns a [Single] emitting the API response.
+   * Search query. Returns an API response wrapped in a [Response].
    */
   @GET("search")
-  fun searchUsers(@Query("query") query: String): Single<UserSearchResponse>
+  suspend fun searchUsers(@Query("query") query: String): Response<UserSearchResponse>
 }
-
-/**
- * Models the search query response.
- */
-data class UserSearchResponse(val ok: Boolean, val users: List<User>)

@@ -1,6 +1,7 @@
 package com.slack.exercise.api
 
-import io.reactivex.rxjava3.core.Single
+import com.slack.exercise.model.usersearch.UserSearchResponse
+import retrofit2.Response
 
 /**
  * Interface to the backend API.
@@ -10,10 +11,9 @@ interface SlackApi {
    * Fetches users with name or username matching the [searchTerm].
    * Calling the API passing an empty [searchTerm] fetches the entire team directory.
    *
-   * Returns a [Single] emitting a set of [User] returned by the API or
-   * an empty set if no users are found.
+   * Returns [UserSearchResponse] returned by the API wrapped in a [Response].
    *
    * Operates on a background thread.
    */
-  fun searchUsers(searchTerm: String): Single<List<User>>
+  suspend fun searchUsers(searchTerm: String): Response<UserSearchResponse>
 }

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.slack.exercise.R
-import com.slack.exercise.model.UserSearchResult
+import com.slack.exercise.model.usersearch.UserSearchResult
 import kotlinx.android.synthetic.main.item_user_search.view.username
 
 /**
