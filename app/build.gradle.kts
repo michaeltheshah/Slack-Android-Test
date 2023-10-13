@@ -1,7 +1,7 @@
 plugins {
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.android.application)
-    kotlin("android")
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -70,17 +70,20 @@ dependencies {
     //Datastore
     implementation(libs.androidx.datastore.preferences)
     //Hilt
-    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
     //Koin
     implementation(libs.koin.android)
+    //Kotlinx.serialization
+    implementation(libs.kotlinx.serialization.core)
+    implementation(libs.kotlinx.serialization.json)
     //OkHttp
     implementation(libs.okhttp.logging.interceptor)
     //Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlin.coroutines.adapter)
     implementation(libs.retrofit.kotlinx.serialization.converter)
-
-    //ksp(libs.hilt)
+    //Timber
+    implementation(libs.timber)
 
     //testImplementation("junit:junit:${versions.junit}")
     //androidTestImplementation("androidx.test.ext:junit:${versions.androidxJunit}")

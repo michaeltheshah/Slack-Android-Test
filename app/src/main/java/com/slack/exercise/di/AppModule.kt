@@ -17,13 +17,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class AppModule {
-    @Provides
-    @Singleton
+    @Binds
     abstract fun provideUserSearchResultDataProvider(
         dataProvider: UserSearchResultDataProviderImpl
     ): UserSearchResultDataProvider
 
-    @Provides
-    @Singleton
+    @Binds
     abstract fun provideSlackApi(apiImpl: SlackApiImpl): SlackApi
 }

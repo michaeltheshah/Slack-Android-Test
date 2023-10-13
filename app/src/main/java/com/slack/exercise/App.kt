@@ -1,21 +1,18 @@
 package com.slack.exercise
 
-import com.slack.exercise.di.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+import org.koin.android.BuildConfig
 import timber.log.Timber
 
-class App : DaggerApplication() {
+@HiltAndroidApp
+class SlackApplication : Application() {
 
-  override fun onCreate() {
-    super.onCreate()
+    override fun onCreate() {
+        super.onCreate()
 
-    if (BuildConfig.DEBUG) {
-      Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
     }
-  }
-
-  override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-    return DaggerAppComponent.create()
-  }
 }
