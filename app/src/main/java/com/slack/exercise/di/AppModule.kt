@@ -1,6 +1,7 @@
 package com.slack.exercise.di
 
 import com.slack.exercise.api.UserSearchRepository
+import com.slack.exercise.api.UserSearchService
 import com.slack.exercise.dataprovider.UserSearchResultDataProvider
 import com.slack.exercise.dataprovider.UserSearchResultDataProviderImpl
 import dagger.Binds
@@ -20,5 +21,5 @@ abstract class AppModule {
     ): UserSearchResultDataProvider
 
     @Binds
-    abstract fun provideSlackApi(apiImpl: UserSearchRepository): SlackApi
+    abstract fun provideUserSearchService(apiImpl: UserSearchRepository): UserSearchService
 }

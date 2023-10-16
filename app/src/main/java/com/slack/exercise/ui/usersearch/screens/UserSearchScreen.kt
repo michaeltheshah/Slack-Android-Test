@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,12 +13,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.input.ImeAction
@@ -28,7 +32,7 @@ import coil.compose.AsyncImage
 import com.slack.exercise.model.usersearch.User
 import com.slack.exercise.theme.avatarRadius
 import com.slack.exercise.theme.avatarSize
-import com.slack.exercise.theme.name
+import com.slack.exercise.theme.displayName
 import com.slack.exercise.theme.username
 import com.slack.exercise.ui.usersearch.viewmodel.UserSearchViewModel
 import com.slack.exercise.util.state.State
@@ -42,9 +46,15 @@ fun UserSearchScreen() {
     }
 
     Column {
-        TextField(
+        OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = viewModel.searchQuerySubject,
+            placeholder = {
+                Text(text = "Search...")
+            },
+            leadingIcon = {
+                Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+            },
             onValueChange = {
                 viewModel.searchQuerySubject = it
             },
@@ -85,7 +95,12 @@ fun UserSearchSuccess(users: List<User>) {
 
 @Composable
 fun UserSearchItem(user: User) {
-    Row {
+    Row(
+        Modifier
+            .padding(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        // Avatar image
         AsyncImage(
             model = user.avatarUrl,
             contentDescription = "avatar",
@@ -93,14 +108,18 @@ fun UserSearchItem(user: User) {
                 .clip(RoundedCornerShape(avatarRadius))
                 .size(avatarSize)
                 .aspectRatio(1f)
+                .padding(start = 8.dp)
         )
 
+        // Display name text
         Text(
+            modifier = Modifier.padding(start = 12.dp),
             text = user.displayName,
-            style = name,
+            style = displayName,
         )
 
-        Text(
+        // Username text
+        Text(modifier = Modifier.padding(horizontal = 8.dp),
             text = user.username,
             style = username,
         )

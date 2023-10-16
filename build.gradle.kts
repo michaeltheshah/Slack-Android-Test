@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.ksp) version libs.versions.ksp apply false
     alias(libs.plugins.kotlin.serialization) version libs.versions.kotlin apply false
     alias(libs.plugins.kotlin.parcelize) version libs.versions.kotlin apply false
+    alias(libs.plugins.dagger.hilt.android) version "2.48.1" apply false
 }
 
 tasks.register<Delete>("clean").configure {

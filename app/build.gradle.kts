@@ -4,11 +4,12 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.kotlin.parcelize)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
     defaultConfig {
-        applicationId = "com.slack.autocomplete"
+        applicationId = "com.slack.exercise"
         compileSdk = 34
         defaultConfig {
             minSdk = 24
@@ -32,6 +33,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     kotlin {
@@ -39,7 +41,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.3"
     }
 
     namespace = "com.slack.exercise"
@@ -71,6 +73,7 @@ dependencies {
     //Datastore
     implementation(libs.androidx.datastore.preferences)
     //Hilt
+    implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     //Koin
     implementation(libs.koin.android)
