@@ -34,9 +34,8 @@ android {
         viewBinding = true
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-        freeCompilerArgs += listOf("-Xdebug")
+    kotlin {
+        jvmToolchain(17)
     }
 
     composeOptions {
@@ -52,7 +51,7 @@ dependencies {
     //Android Support Libraries
     api(libs.lifecycle.viewmodel.ktx)
 
-    implementation(libs.coil)
+    implementation(libs.coil.compose)
     //Compose
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.tooling)
