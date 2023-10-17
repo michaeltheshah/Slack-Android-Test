@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
@@ -33,6 +35,8 @@ import com.slack.exercise.model.usersearch.User
 import com.slack.exercise.theme.avatarRadius
 import com.slack.exercise.theme.avatarSize
 import com.slack.exercise.theme.displayName
+import com.slack.exercise.theme.dividerColor
+import com.slack.exercise.theme.dividerHeight
 import com.slack.exercise.theme.username
 import com.slack.exercise.ui.usersearch.viewmodel.UserSearchViewModel
 import com.slack.exercise.util.state.State
@@ -47,7 +51,9 @@ fun UserSearchScreen() {
 
     Column {
         OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
             value = viewModel.searchQuerySubject,
             placeholder = {
                 Text(text = "Search...")
@@ -87,8 +93,18 @@ fun UserSearchScreen() {
 @Composable
 fun UserSearchSuccess(users: List<User>) {
     LazyColumn {
-        items(users) { user ->
+        itemsIndexed(users) { index, user ->
             UserSearchItem(user)
+
+            if (index < users.lastIndex) {
+                Divider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 8.dp),
+                    thickness = dividerHeight,
+                    color = dividerColor,
+                )
+            }
         }
     }
 }
@@ -108,7 +124,6 @@ fun UserSearchItem(user: User) {
                 .clip(RoundedCornerShape(avatarRadius))
                 .size(avatarSize)
                 .aspectRatio(1f)
-                .padding(start = 8.dp)
         )
 
         // Display name text

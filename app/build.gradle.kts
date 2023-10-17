@@ -48,6 +48,10 @@ android {
         unitTests.isReturnDefaultValues = true
     }
 
+    packaging {
+        resources.excludes.add("META-INF/*")
+    }
+
     namespace = "com.slack.exercise"
 }
 
