@@ -44,6 +44,10 @@ android {
         kotlinCompilerExtensionVersion = "1.5.3"
     }
 
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
+
     namespace = "com.slack.exercise"
 }
 
@@ -89,7 +93,17 @@ dependencies {
     //Timber
     implementation(libs.timber)
 
-    //testImplementation("junit:junit:${versions.junit}")
-    //androidTestImplementation("androidx.test.ext:junit:${versions.androidxJunit}")
-    //androidTestImplementation("androidx.test.espresso:espresso-core:${versions.espresso}")
+    // Testing
+
+    // Coroutines
+    testImplementation(libs.kotlinx.coroutines.test)
+    // JUnit
+    testImplementation(libs.junit)
+    testImplementation(libs.androidx.core.testing)
+
+    // Mockito
+    testImplementation(libs.mockito.kotlin)
+
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    implementation(libs.mockk)
 }
