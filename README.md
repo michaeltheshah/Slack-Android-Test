@@ -1,12 +1,18 @@
 ## Test Slack Android App
 
-This is a basic test Slack Android app that fetches a list of users and presents them in a Jetpack Compose list.
+This is a basic test Slack Android app that fetches a list of users and presents them in a Jetpack Compose list. It follows
+the MVVM architecture and uses Retrofit to fetch data from the Slack API. It also uses Hilt for dependency injection and
+Coil for image loading. 
+
+Jetpack Compose is now the official UI toolkit for Android. This implementation of the Slack Test replaces usages of XML
+layouts with Composables. In addition, the new Gradle version catalog has been implemented to allow for easier dependency
+versioning optimization.
 
 **Features:**
 
 * Fetches a list of users from the Slack API
 * Displays the list of users in a Jetpack Compose list
-* Allows users to view the profile of a user
+* Allows users to search for users by name.
 
 **Libraries:**
 
@@ -14,6 +20,10 @@ This is a basic test Slack Android app that fetches a list of users and presents
 * OkHttp
 * Hilt
 * Coil
+* Jetpack Compose
+* Coroutines
+* Flow
+* Room
 
 **Architecture:**
 
