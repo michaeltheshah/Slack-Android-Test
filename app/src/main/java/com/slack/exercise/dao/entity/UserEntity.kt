@@ -7,7 +7,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * User model returned by the API.
+ * User entity representing row in SQLite database.
  */
 @Entity(tableName = "users")
 data class UserEntity(

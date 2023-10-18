@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -51,6 +52,8 @@ fun UserSearchScreen() {
 	val denylistfile = LocalContext.current.resources.openRawResource(R.raw.denylist)
 	val denyTrie = denylistfile.toStringList().toTrie()
 
+	// Using collectAsStateWithLifecycle due to StateFlow not being integrated with
+	// the Activity lifecycle like LiveData is.
 	val searchQuery by viewModel.searchQueryState.collectAsStateWithLifecycle()
 
 	LaunchedEffect(Unit) {
@@ -65,10 +68,10 @@ fun UserSearchScreen() {
 				.padding(8.dp),
 			value = searchQuery,
 			placeholder = {
-				Text(text = "Search...")
+				Text(text = stringResource(R.string.search))
 			},
 			leadingIcon = {
-				Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+				Icon(imageVector = Icons.Default.Search, contentDescription = stringResource(R.string.search_content_desc))
 			},
 			onValueChange = { value ->
 				viewModel.updateSearchQuery(value)
@@ -128,7 +131,7 @@ fun UserSearchItem(user: User) {
 		// Avatar image
 		AsyncImage(
 			model = user.avatarUrl,
-			contentDescription = "avatar",
+			contentDescription = stringResource(R.string.avatar_content_desc),
 			modifier = Modifier
 				.clip(RoundedCornerShape(avatarRadius))
 				.size(avatarSize)
@@ -153,12 +156,12 @@ fun UserSearchItem(user: User) {
 
 @Composable
 fun UserSearchError(exception: Exception) {
-	Column {
+	Column(Modifier.padding(8.dp)) {
 		Icon(
 			imageVector = Icons.Default.Warning,
 			modifier = Modifier.padding(bottom = 4.dp),
 			contentDescription = null
 		)
-		Text(exception.localizedMessage ?: "Sorry, there was an error while loading data.")
+		Text(exception.localizedMessage ?: stringResource(R.string.generic_error_message))
 	}
 }

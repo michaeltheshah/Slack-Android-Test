@@ -48,6 +48,7 @@ class UserSearchViewModel @Inject constructor(
         )
 
     init {
+        // Used debounce here to avoid conflicts within the Flow during fast typing.
         _searchQuery
             .debounce(150)
             .distinctUntilChanged()

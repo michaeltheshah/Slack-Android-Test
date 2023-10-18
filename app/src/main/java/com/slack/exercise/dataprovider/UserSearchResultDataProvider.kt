@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 interface UserSearchResultDataProvider {
 
   /**
-   * Returns a list of [User] wrapped in a [NetworkResult].
+   * Returns a list of [User] emitted in a [Flow].
    */
   suspend fun fetchUsers(searchTerm: String, forceRefresh: Boolean = false): Flow<List<User>>
 }

@@ -28,7 +28,7 @@ class UserSearchResultDataProviderImpl @Inject constructor(
 ) : UserSearchResultDataProvider {
 
     /**
-     * Emits a list of [User] wrapped in a [NetworkResult] using Flow.
+     * Emits a list of [User] emitted in a [Flow].
      */
     override suspend fun fetchUsers(searchTerm: String, forceRefresh: Boolean) = flow {
         val localUsers = userDao.getAllUsers()
