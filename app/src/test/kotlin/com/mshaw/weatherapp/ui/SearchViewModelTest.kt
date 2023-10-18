@@ -20,6 +20,7 @@ import junit.framework.TestCase.fail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestCoroutineScheduler
 import kotlinx.coroutines.test.TestScope
@@ -50,9 +51,6 @@ class SearchViewModelTest {
 
     @MockK
     lateinit var response: Response
-
-    @MockK
-    lateinit var userSearchResultDataProvider: UserSearchResultDataProviderImpl
 
     @MockK
     lateinit var viewModel: UserSearchViewModel
@@ -103,7 +101,6 @@ class SearchViewModelTest {
 
         every { viewModel.fetchSearchQueryResults() } answers { Job() }
         coEvery { response.isSuccessful } answers { true }
-        coEvery { userSearchResultDataProvider.fetchUsers(any()) } returns NetworkResult.Ok(successfulResponse, response).transform { it.users }
         advanceUntilIdle()
         viewModel.fetchSearchQueryResults()
         verify { viewModel.fetchSearchQueryResults() }
@@ -115,8 +112,7 @@ class SearchViewModelTest {
         val exception = Exception()
 
         every { viewModel.fetchSearchQueryResults() } answers { Job() }
-        coEvery { response.isSuccessful } answers { true }
-        coEvery { userSearchResultDataProvider.fetchUsers(any()) } returns NetworkResult.Error(exception)
+        coEvery { response.isSuccessful } answers { false }
         advanceUntilIdle()
         viewModel.fetchSearchQueryResults()
         verify { viewModel.fetchSearchQueryResults() }
