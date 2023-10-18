@@ -13,6 +13,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
@@ -22,6 +23,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 /**
@@ -71,8 +73,13 @@ class UserSearchViewModel @Inject constructor(
      * Fetches search results for the current search query.
      */
     fun fetchSearchQueryResults() = viewModelScope.launch {
-        _searchResults.value = userNameResultDataProvider
+        userNameResultDataProvider
             .fetchUsers(searchQueryState.value)
-            .toState()
+            .catch {
+                _searchResults.value = State.Error(Exception(it))
+            }
+            .collect {
+                _searchResults.value = State.Success(it)
+            }
     }
 }

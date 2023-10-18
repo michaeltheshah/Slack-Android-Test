@@ -94,6 +94,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlin.coroutines.adapter)
     implementation(libs.retrofit.kotlinx.serialization.converter)
+    //Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
     //Timber
     implementation(libs.timber)
 

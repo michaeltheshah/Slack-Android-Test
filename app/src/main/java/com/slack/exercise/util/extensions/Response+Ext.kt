@@ -25,9 +25,5 @@ fun <T> Response<T>.toNetworkResult(): NetworkResult<T> {
     }
 }
 
-val <T> Response<T>.value: T
-    get() = try {
-        body() as T
-    } catch (e: Exception) {
-        throw HttpException(this)
-    }
+val <T> Response<T>.value: T?
+    get() = body()
